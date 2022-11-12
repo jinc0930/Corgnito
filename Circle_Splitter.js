@@ -28,22 +28,6 @@ $(document).ready(function() {
          return d.id;
       });
 
-   function onMouseMove() {
-      var mousePosition = d3.mouse(vis.node());
-
-      // Do nothing if the mouse point is not valid
-      if (isNaN(mousePosition[0])) {
-         prevMousePosition = null;
-         return;
-      }
-
-      if (prevMousePosition) {
-         findAndSplit(prevMousePosition, mousePosition);
-      }
-      prevMousePosition = mousePosition;
-      d3.event.preventDefault();
-   }
-
    function addHandlers() {
       d3.selectAll("circles")
          .on("mouseenter", function() {
