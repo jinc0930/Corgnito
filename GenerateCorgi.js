@@ -17,7 +17,13 @@ function drawCircle(x, y, r, color) {
       ctx.fillStyle = color;
       ctx.fill();
    }
-   return x, y, r, color;
+   return {
+      "x": x,
+      "y": y,
+      "r": r,
+      "color": color,
+      "id": count++
+   };
 }
 
 function matrixCircle(r, color) {
@@ -104,15 +110,62 @@ async function colors() {
 async function drawCanvas() {
    // const c = document.getElementById("circle")
    const colorArray = await colors();
-   console.log(colorArray);
+   // console.log(colorArray);
    // let circleLayer = 0;
-   matrixCircle(Math.floor(width/2),colorArray[0]);
+   // matrixCircle(Math.floor(width/2),colorArray[0]);
 
    // c.onmousemove(() => {
    //     circleLayer +=1;
    //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
    //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
    // });
+
+   let circle = drawCircle(width / 2, width / 2, width / 2, colorArray[0]);
+   circlesData.push(circle);
+   console.log(circlesData[0]["id"]);
+   let r = Math.floor(width / 2);
+   let y = width / 2;
+   drawCircle((circle.x - r) + r / 2, (y - r) + r / 2, r / 2, convertRGBtoHex(colorArray[1][0][0]));
+   drawCircle((circle.x - r) + r / 2, (y - r) + r * 1.5, r / 2, convertRGBtoHex(colorArray[1][0][1]));
+   drawCircle((circle.x - r) + r * 1.5, (y - r) + r / 2, r / 2, convertRGBtoHex(colorArray[1][1][0]));
+   drawCircle((circle.x - r) + r * 1.5, (y - r) + r * 1.5, r / 2, convertRGBtoHex(colorArray[1][1][1]));
 }
 
 drawCanvas();
+let count = 0;
+
+
+
+let circlesData = [];
+
+// d3.select("canvas").append("circle");
+
+// let circles = d3.selectAll("circle");
+
+// circles
+//    .attr("cx", function(d){
+//       return d.x;
+//    })
+//    .attr("cy", function(d){
+//       return d.y;
+//    })
+//    .attr("r", function(d) {
+//       return d.r;
+//    })
+//    .attr("id", function(d) {
+//       return d.id;
+//    });
+
+// function addData(x, y, r, color) {
+//    // Top left
+//    circlesData.push(drawCircle((x - r) + r / 2, (y - r) + r / 2, r / 2, colorArray[0]));
+
+//    // Bottom left
+//    circlesData.push(drawCircle((x - r) + r / 2, (y - r) + r * 1.5, r / 2, colorArray[0]));
+
+//    // Top right
+//    circlesData.push(drawCircle((x - r) + r * 1.5, (y - r) + r / 2, r / 2, colorArray[0]));
+
+//    // Bottom right
+//    circlesData.push(drawCircle((x - r) + r * 1.5, (y - r) + r * 1.5, r / 2, colorArray[0]));
+// }
