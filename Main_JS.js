@@ -1,3 +1,16 @@
-const corgi = new Image();
-let images = ["Corgi_Fall.jpg", "Corgi_Toast.png"];
-corgi.src = "Image/" + images[Math.floor(Math.random()*images.length)];
+const express = require("express");
+const app = express();
+app.use(express.static("."));
+app.get("/", function (req, res) {
+    res.sendFile(__dirname + "/Main_HTML.html");
+});
+app.listen(3000, function () {
+    console.log("Server is running on localhost3000");
+});
+
+
+
+
+
+
+
