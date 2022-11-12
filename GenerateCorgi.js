@@ -113,3 +113,5 @@ async function drawCanvas() {
     //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
     // });
 }
+
+drawCanvas();
