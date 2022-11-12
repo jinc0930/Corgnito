@@ -11,3 +11,15 @@
    width: 512px;
    height: 512px;
 }
+
+#container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+svg {
+   width: 512px;
+   height: 512px;
+}
