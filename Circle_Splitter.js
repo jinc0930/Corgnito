@@ -28,6 +28,22 @@ $(document).ready(function() {
          return d.id;
       });
 
+   function onMouseMove() {
+      var mousePosition = d3.mouse(vis.node());
+
+      // Do nothing if the mouse point is not valid
+      if (isNaN(mousePosition[0])) {
+         prevMousePosition = null;
+         return;
+      }
+
+      if (prevMousePosition) {
+         findAndSplit(prevMousePosition, mousePosition);
+      }
+      prevMousePosition = mousePosition;
+      d3.event.preventDefault();
+   }
+
    function addHandlers() {
       d3.selectAll("circles")
          .on("mouseenter", function() {
@@ -63,7 +79,7 @@ $(document).ready(function() {
          "r": r / 2,
          "id": count
       });
-      count++;
+      count++
 
       // Bottom left
       data.push({
@@ -72,7 +88,7 @@ $(document).ready(function() {
          "r": r / 2,
          "id": count
       });
-      count++;
+      count++
 
       // Top right
       data.push({
@@ -81,7 +97,7 @@ $(document).ready(function() {
          "r": r / 2,
          "id": count
       });
-      count++;
+      count++
 
       // Bottom right
       data.push({
@@ -90,8 +106,9 @@ $(document).ready(function() {
          "r": r / 2,
          "id": count
       });
-      count++;
+      count++
    }
+
    function applyAttrs() {
       var selection = d3.selectAll("circle");
       selection.data(data);
@@ -118,4 +135,10 @@ $(document).ready(function() {
          data[i].id = i;
       }
    }
+
+   d3.select(document.body)
+      .on('mousemove', onMouseMove)
+      .on('touchmove', onTouchMove)
+      .on('touchend', onTouchEnd)
+      .on('touchcancel', onTouchEnd);
 });
