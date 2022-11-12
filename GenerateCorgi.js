@@ -8,20 +8,7 @@ const height = 512;
 pic.src = img;
 corgi.src = img;
 const c = document.getElementById("circle");
-drawCanvas();
-async function drawCanvas() {
-    // const c = document.getElementById("circle")
-    const colorArray = await colors();
-    console.log(colorArray);
-    // let circleLayer = 0;
-    matrixCircle(Math.floor(width/2),colorArray[0]);
 
-    // c.onmousemove(() => {
-    //     circleLayer +=1;
-    //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
-    //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
-    // });
-}
 
 function drawCircle(x, y, r, color) {
     const ctx = c.getContext("2d");
@@ -40,19 +27,15 @@ function drawCircle(x, y, r, color) {
 }
 
 function matrixCircle(r, color) {
-    for(var x = 0; x < Math.floor(c.width/(2*r)); x++) {
-        for(var y = 0; y < Math.floor(c.height/(2*r)); y++) {
+    for(let x = 0; x < Math.floor(c.width/(2*r)); x++) {
+        for (let y = 0; y < Math.floor(c.height / (2 * r)); y++) {
             console.log(r);
-            drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
-    for(var x = 0; x < Math.floor(corgi.width/r); x++) {
-        for(var y = 0; y < Math.floor(corgi.height/r); y++) {
-            drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
+            drawCircle((2 * x + 1) * r, (2 * y + 1) * r, r, convertRGBtoHex(color[x][y]));
         }
     }
 }
 
-function decToHexa(n)
-{
+function decToHexa(n) {
     // char array to store hexadecimal number
     let hexaDeciNum = Array.from({length: 2}, (_, i) => 0);
     let i = 0;
@@ -84,8 +67,7 @@ function decToHexa(n)
     return hexCode;
 }
 
-function convertRGBtoHex(color)
-{
+function convertRGBtoHex(color) {
     let R = color[0];
     let G = color[1];
     let B = color[2];
@@ -162,5 +144,19 @@ async function colors() {
     }
     return await calcSmallestCircleColors().then(array => circleColors[layers] = array).then(() => doRest(circleColors));
 
+}
+drawCanvas();
+async function drawCanvas() {
+    // const c = document.getElementById("circle")
+    const colorArray = await colors();
+    console.log(colorArray);
+    // let circleLayer = 0;
+    matrixCircle(Math.floor(width/2),colorArray[0]);
+
+    // c.onmousemove(() => {
+    //     circleLayer +=1;
+    //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
+    //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
+    // });
 }
 
