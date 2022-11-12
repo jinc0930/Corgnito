@@ -119,10 +119,4 @@ $(document).ready(function() {
          data[i].id = i;
       }
    }
-
-   d3.select(document.body)
-      .on('mousemove', onMouseMove)
-      .on('touchmove', onTouchMove)
-      .on('touchend', onTouchEnd)
-      .on('touchcancel', onTouchEnd);
 });
