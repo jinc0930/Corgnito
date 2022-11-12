@@ -7,15 +7,10 @@ const width = 512;
 const height = 512;
 pic.src = img;
 corgi.src = img;
-const c = document.getElementById("circle");
+
 
 
 function drawCircle(x, y, r, color) {
-    const ctx = c.getContext("2d");
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2*Math.PI);
-    ctx.fillStyle=color;
-    ctx.fill();
     const c = document.getElementById("circle");
     if (c.getContext) {
         const ctx = c.getContext("2d");
