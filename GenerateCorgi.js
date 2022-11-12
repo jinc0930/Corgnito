@@ -123,13 +123,7 @@ async function drawCanvas() {
         }
     }
     c.addEventListener("mousemove", (event) => onMouseMove(event), false);
-    // let circleLayer = 0;
     drawCircle(Math.floor(width/2), width/2, Math.floor(height/2),colorArray[0][0][0]);
-    // c.onmousemove(() => {
-    //     circleLayer +=1;
-    //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
-    //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
-    // });
 }
 drawCanvas();
 
