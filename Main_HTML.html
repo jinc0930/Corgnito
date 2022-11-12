@@ -12,11 +12,13 @@
       <script src = "Circle_Splitter.js"></script>
    </head>
 
-   <body>
+   <!-- <body>
       <img src = "" alt = "" id = "pic" class = "box" style = "object-fit: cover"/>
       <script src = "GenerateCorgi.js" type = "text/javascript"></script>
-      <div id = "container">
-         <svg></svg>
-      </div>
+   </body> -->
+
+   <body onload = "matrixCircle(10, [[[255, 50, 100], [255, 50, 100]]]);">
+      <canvas id = "circle" class = "box" style = "object-fit: cover"></canvas>
+      <script src = "GenerateCorgi.js" type = "text/javascript"></script>
    </body>
 </html>
