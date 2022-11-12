@@ -3,7 +3,6 @@ const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 corgi.src = img;
 
-const c = document.getElementById("circle");
 function drawCircle(x, y, r, color) {
     const c = document.getElementById("circle");
     if (c.getContext) {
@@ -16,15 +15,14 @@ function drawCircle(x, y, r, color) {
 }
 
 function matrixCircle(r, color) {
-    for(var x = 0; x < Math.floor(corgi.width/r); x++) {
-        for(var y = 0; y < Math.floor(corgi.height/r); y++) {
+    for(var x = 0; x < Math.floor(512/r); x++) {
+        for(var y = 0; y < Math.floor(512/r); y++) {
             drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
         }
     }
 }
 
-function convertRGBtoHex(color)
-{
+function convertRGBtoHex(color) {
     let R = color[0];
     let G = color[1];
     let B = color[2];
