@@ -22,8 +22,8 @@ function drawCircle(x, y, r, color) {
 }
 
 function matrixCircle(r, color) {
-    for(let x = 0; x < Math.floor(width/r); x++) {
-        for(let y = 0; y < Math.floor(height/r); y++) {
+    for(let x = 0; x < Math.floor(width/(2*r)); x++) {
+        for(let y = 0; y < Math.floor(height/(2*r)); y++) {
             drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
         }
     }
