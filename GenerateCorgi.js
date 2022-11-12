@@ -1,4 +1,4 @@
-let images = ["Corgi_Fall.jpg", "Corgi_Toast.png", "Corgi_Blanket.jpeg", "Corgi_Eggtoast.png", "Corgi_Leash.jpeg", "Corgi_Run.jpeg", "A_black_image.jpeg"];
+let images = ["Corgi_Eggtoast.png", "Corgi_Toast.png", "Pixel_Corgi.png", "Sweater_Corgi.png"];
 const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
@@ -104,7 +104,7 @@ async function drawCanvas() {
     const colorArray = await colors();
     function onMouseMove(event) {
         let mouse = getMousePos(c,event);
-        const possibleCircles= circleArray.map(e=>e).filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] >= width/(Math.pow(2, max_layers)));
+        const possibleCircles= circleArray.map(e=>e).filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] >= 6);
         if (circleArray.filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] > width/max_layers)) {
             if(circleArray.length) {
                 const circle = possibleCircles.reduce((acc,e) => Math.pow(mouse.x - e[0],2) + Math.pow(mouse.y - e[1], 2) < Math.pow(e[2],2)? e: acc,[]);
