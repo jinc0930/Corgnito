@@ -1,4 +1,4 @@
-let images = ["Corgi_Fall.jpg", "Corgi_Toast.png", "Corgi_Blanket.jpeg", "Corgi_Eggtoast.png", "Corgi_Leash.jpeg", "Corgi_Run.jpeg", "A_black_image.jpeg"];
+let images = ["Corgi_Fall.jpg", "Corgi_Toast.png", "Corgi_Blanket.jpeg", "Corgi_Eggtoast.png", "Corgi_Leash.jpeg", "Corgi_Run.jpeg"];
 const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
@@ -123,13 +123,7 @@ async function drawCanvas() {
         }
     }
     c.addEventListener("mousemove", (event) => onMouseMove(event), false);
-    // let circleLayer = 0;
     drawCircle(Math.floor(width/2), width/2, Math.floor(height/2),colorArray[0][0][0]);
-    // c.onmousemove(() => {
-    //     circleLayer +=1;
-    //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
-    //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
-    // });
 }
 drawCanvas();
 
