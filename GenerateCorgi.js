@@ -5,7 +5,7 @@ const canvasImg= document.getElementById('a');
 const pic = document.getElementById("pic");
 const width = 512;
 const height = 512;
-pic.src = img;
+// pic.src = img;
 corgi.src = img;
 
 function drawCircle(x, y, r, color) {
@@ -20,8 +20,8 @@ function drawCircle(x, y, r, color) {
 }
 
 function matrixCircle(r, color) {
-    for(var x = 0; x < Math.floor(512/r); x++) {
-        for(var y = 0; y < Math.floor(512/r); y++) {
+    for(let x = 0; x < Math.floor(width/(2*r)); x++) {
+        for(let y = 0; y < Math.floor(height/(2*r)); y++) {
             drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
         }
     }
@@ -68,7 +68,7 @@ async function colors() {
         canvas.height = height;
         canvas.width = width;
         const corgiCanvas = canvas.getContext('2d', 'willReadFrequently');
-        await corgiCanvas.drawImage(corgi, 0, 0, 512, 512);
+        await corgiCanvas.drawImage(corgi, 0, 0, width, height);
         for (let i = 0; i < circles; ++i) {
             let lineColor = []
             const xoffset = Math.floor(i * width / circles);
@@ -100,7 +100,6 @@ async function colors() {
     return await calcSmallestCircleColors().then(array => circleColors[layers] = array).then(() => doRest(circleColors));
 
 }
-drawCanvas();
 async function drawCanvas() {
     // const c = document.getElementById("circle")
     const colorArray = await colors();
