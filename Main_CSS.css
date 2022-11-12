@@ -1,7 +1,7 @@
 .box {
    background-color: lightgrey;
    width: 300px;
-   border: 15px solid green;
-   padding: 50px;
-   margin: 20px;
+   border: 1px solid black;
+   padding: 5px;
+   margin: auto;
 }
