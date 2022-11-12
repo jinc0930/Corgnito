@@ -1,4 +1,5 @@
 .box {
+   display: block;
    width: 1000 px;
    height: 1000 px;
    border: 100 px solid black;
