@@ -1,33 +1,34 @@
 let images = ["Corgi_Fall.jpg", "Corgi_Toast.png", "Corgi_Blanket.jpeg", "Corgi_Eggtoast.png", "Corgi_Leash.jpeg", "Corgi_Run.jpeg"];
 const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
-const canvasImg= document.getElementById('a');
-const pic = document.getElementById("pic");
 const width = 512;
 const height = 512;
+const max_layers= 4;
 // pic.src = img;
 corgi.src = img;
+const c = document.getElementById("circle");
+const ctx = c.getContext("2d");
+let id = 0;
 
+let circleArray = [];
+
+
+function getMousePos(canvas, evt) {
+    let rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
 
 
 function drawCircle(x, y, r, color) {
-    const c = document.getElementById("circle");
-    if (c.getContext) {
-        const ctx = c.getContext("2d");
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2*Math.PI);
-        ctx.fillStyle = color;
+        ctx.fillStyle = convertRGBtoHex(color);
         ctx.fill();
+        circleArray.push([x,y,r, id++]);
     }
-}
-
-function matrixCircle(r, color) {
-    for(let x = 0; x < Math.floor(width/r); x++) {
-        for(let y = 0; y < Math.floor(height/r); y++) {
-            drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
-        }
-    }
-}
 
 function convertRGBtoHex(color) {
     let R = color[0];
@@ -40,8 +41,7 @@ function convertRGBtoHex(color) {
 
 
 async function colors() {
-    const layers = 4;
-    let circleColors = new Array(layers+1);
+    let circleColors = new Array(max_layers+1);
 
     const calcNextColors = (width, colorArray) => {
         let colColors = []
@@ -64,7 +64,7 @@ async function colors() {
     async function calcSmallestCircleColors() {
 
         await new Promise((resolve) => { corgi.onload = resolve; });
-        const circles = Math.pow(2, layers)
+        const circles = Math.pow(2, max_layers)
         let colorArray = [];
         const canvas = document.createElement("canvas");
         canvas.height = height;
@@ -81,9 +81,6 @@ async function colors() {
                 let rgba = corgiCanvas.getImageData(
                     xoffset, yoffset, Math.floor(width/circles), Math.floor(height/circles)
                 ).data;
-                if (i===10&&j===10) {
-                    console.log(rgba);
-                }
                 rgb = rgb.map((e,index) => rgba.reduce((acc,el, ind) => ind % 4 === index ? acc + el: acc, 0))
                 rgb = rgb.map(e => Math.floor(4*e/rgba.length));
                 lineColor.push(rgb);
@@ -94,21 +91,40 @@ async function colors() {
     }
     const doRest = (colors) => {
         let circleColors = colors.map(e=> e);
-        for (let a = layers - 1; a >= 0; --a) {
+        for (let a = max_layers - 1; a >= 0; --a) {
             circleColors[a] = calcNextColors(a,circleColors);
         }
         return circleColors;
     }
-    return await calcSmallestCircleColors().then(array => circleColors[layers] = array).then(() => doRest(circleColors));
+    return await calcSmallestCircleColors().then(array => circleColors[max_layers] = array).then(() => doRest(circleColors));
 
 }
 async function drawCanvas() {
     // const c = document.getElementById("circle")
     const colorArray = await colors();
-    console.log(colorArray);
+    function onMouseMove(event) {
+        let mouse = getMousePos(c,event);
+        const possibleCircles= circleArray.map(e=>e).filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] >= width/(Math.pow(2, max_layers)));
+        if (circleArray.filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] > width/max_layers)) {
+            if(circleArray.length) {
+                const circle = possibleCircles.reduce((acc,e) => Math.pow(mouse.x - e[0],2) + Math.pow(mouse.y - e[1], 2) < Math.pow(e[2],2)? e: acc,[]);
+                if (circle.length) {
+                    const layer = Math.log2((width/2)/circle[2]);
+                    const left = Math.floor((circle[0]  - circle[2])/(circle[2]));
+                    const top = Math.floor((circle[1]  - circle[2])/(circle[2]));
+                    circleArray = circleArray.filter(e => e.id !== circle.id);
+                    ctx.clearRect(circle[0]- circle[2], circle[1]- circle[2], 2*circle[2], 2* circle[2]);
+                    drawCircle(circle[0]- circle[2]/2, circle[1]- circle[2]/2, circle[2]/2, colorArray[layer+1][left][top]);
+                    drawCircle(circle[0]- circle[2]/2, circle[1]+ circle[2]/2, circle[2]/2, colorArray[layer+1][left][top+1]);
+                    drawCircle(circle[0]+ circle[2]/2, circle[1]- circle[2]/2, circle[2]/2, colorArray[layer+1][left+1][top]);
+                    drawCircle(circle[0]+ circle[2]/2, circle[1]+ circle[2]/2, circle[2]/2, colorArray[layer+1][left+1][top+1]);
+                }
+            }
+        }
+    }
+    c.addEventListener("mousemove", (event) => onMouseMove(event), false);
     // let circleLayer = 0;
-    matrixCircle(Math.floor(width/2),colorArray[0]);
-
+    drawCircle(Math.floor(width/2), width/2, Math.floor(height/2),colorArray[0][0][0]);
     // c.onmousemove(() => {
     //     circleLayer +=1;
     //     c.getContext("2d").clearRect(0, 0, c.width, c.height);
