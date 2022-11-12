@@ -8,8 +8,6 @@ const height = 512;
 pic.src = img;
 corgi.src = img;
 
-
-
 function drawCircle(x, y, r, color) {
     const c = document.getElementById("circle");
     if (c.getContext) {
@@ -116,4 +114,3 @@ async function drawCanvas() {
     //     matrixCircle(Math.floor(width/Math.pow(2,circleLayer)),colorArray[circleLayer]);
     // });
 }
-
