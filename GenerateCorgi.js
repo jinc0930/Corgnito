@@ -1,21 +1,24 @@
 let images = ["Corgi_Fall.jpg", "Corgi_Toast.png", "Corgi_Blanket.jpeg", "Corgi_Eggtoast.png", "Corgi_Leash.jpeg", "Corgi_Run.jpeg"];
 const img = "Image/" + images[Math.floor(Math.random()*images.length)];
-const corgi = document.getElementById("pic")
+const corgi = document.createElement("img")
 corgi.src = img;
 
-const c = document.getElementById("circle")
-const ctx = c.getContext("2d");
+const c = document.getElementById("circle");
 function drawCircle(x, y, r, color) {
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2*Math.PI);
-    ctx.fillStyle(color);
-    ctx.fill();
+    const c = document.getElementById("circle");
+    if (c.getContext) {
+        const ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2*Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
 }
 
 function matrixCircle(r, color) {
-    for(var x = 0; x < Math.floor(c.width/r); x++) {
-        for(var y = 0; y < Math.floor(c.height/r); y++) {
-            drawCircle(x*r, y*r, r, convertRGBtoHex(color[x][y]));
+    for(var x = 0; x < Math.floor(corgi.width/r); x++) {
+        for(var y = 0; y < Math.floor(corgi.height/r); y++) {
+            drawCircle((2*x+1)*r, (2*y+1)*r, r, convertRGBtoHex(color[x][y]));
         }
     }   
 }
@@ -55,9 +58,9 @@ function decToHexa(n)
     
 function convertRGBtoHex(color)
 {
-    R = color[0];
-    B = color[1];
-    G = color[2];
+    let R = color[0];
+    let G = color[1];
+    let B = color[2];
     if ((R >= 0 && R <= 255) && (G >= 0 && G <= 255) && (B >= 0 && B <= 255)) {
         let hexCode = "#";
         hexCode += decToHexa(R);
