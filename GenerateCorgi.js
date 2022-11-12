@@ -3,7 +3,7 @@ const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
 const height = 512;
-const max_layers= 4;
+const max_layers= 8;
 // pic.src = img;
 corgi.src = img;
 const c = document.getElementById("circle");
@@ -112,7 +112,7 @@ async function drawCanvas() {
                     const layer = Math.log2((width/2)/circle[2]);
                     const left = Math.floor((circle[0]  - circle[2])/(circle[2]));
                     const top = Math.floor((circle[1]  - circle[2])/(circle[2]));
-                    circleArray = circleArray.filter(e => e.id !== circle.id);
+                    circleArray = circleArray.filter(e => e[3] !== circle[3]);
                     ctx.clearRect(circle[0]- circle[2], circle[1]- circle[2], 2*circle[2], 2* circle[2]);
                     drawCircle(circle[0]- circle[2]/2, circle[1]- circle[2]/2, circle[2]/2, colorArray[layer+1][left][top]);
                     drawCircle(circle[0]- circle[2]/2, circle[1]+ circle[2]/2, circle[2]/2, colorArray[layer+1][left][top+1]);
