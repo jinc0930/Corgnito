@@ -1,6 +1,6 @@
 .box {
-   max-width: 500px;
-   max-height: 500px;
+   max-width: 512px;
+   max-height: 512px;
    margin-top: 8%;
    margin-left: 36%;
    margin-right: 33%;
@@ -8,6 +8,6 @@
 }
 
 #pic {
-   width: 500px;
-   height: 500px;
+   width: 512px;
+   height: 512px;
 }
