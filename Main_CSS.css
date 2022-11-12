@@ -1,8 +1,12 @@
 .box {
-   background-color: white;
-   width: 30%;
-   height: 500px;
+   max-width: 500px;
+   max-height: 500px;
    margin-top: 8%;
-   margin-left: 33%;
+   margin-left: 36%;
    margin-right: 33%;
+}
+
+#pic {
+   width: 500px;
+   height: 500px;
 }
