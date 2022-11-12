@@ -23,51 +23,13 @@ function matrixCircle(r, color) {
     }
 }
 
-function decToHexa(n)
-{
-    // char array to store hexadecimal number
-    let hexaDeciNum = Array.from({length: 2}, (_, i) => 0);
-    let i = 0;
-    while (n != 0) {
-        let temp = 0;
-        temp = n % 16;
-        if (temp < 10) {
-            hexaDeciNum[i] = String.fromCharCode(temp + 48);
-            i++;
-        }
-        else {
-            hexaDeciNum[i] =  String.fromCharCode(temp + 55);
-            i++;
-        }
-        n = Math.floor(n / 16);
-    }
-    let hexCode = "";
-    if (i == 2) {
-        hexCode+=hexaDeciNum[0];
-        hexCode+=hexaDeciNum[1];
-    }
-    else if (i == 1) {
-        hexCode = "0";
-        hexCode+=hexaDeciNum[0];
-    }
-    else if (i == 0)
-        hexCode = "00";
-
-    return hexCode;
-}
-
 function convertRGBtoHex(color)
 {
     let R = color[0];
     let G = color[1];
     let B = color[2];
     if ((R >= 0 && R <= 255) && (G >= 0 && G <= 255) && (B >= 0 && B <= 255)) {
-        let hexCode = "#";
-        hexCode += decToHexa(R);
-        hexCode += decToHexa(G);
-        hexCode += decToHexa(B);
-
-        return hexCode;
+        return "#" + R.toString(16) + G.toString(16) + B.toString(16);
     }
 }
 
