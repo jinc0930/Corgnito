@@ -30,7 +30,7 @@ $(document).ready(function() {
 
    function addHandlers() {
       d3.selectAll("circles")
-         .on("onmouseenter", function() {
+         .on("mouseenter", function() {
             if (this.getAttribute("r") > 2) {
                var c1 = d3.select("svg").append("circle");
                var c2 = d3.select("svg").append("circle");
