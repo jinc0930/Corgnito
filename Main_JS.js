@@ -8,7 +8,3 @@ const express = require("express");
  app.listen(3000, function () {
      console.log("Server is running on localhost3000");
  });
-
-const corgi = new Image();
-let images = ["Corgi_Fall.jpg", "Corgi_Toast.png"];
-corgi.src = "Image/" + images[Math.floor(Math.random()*images.length)];
