@@ -1,5 +1,5 @@
 let images = ["Corgi_Eggtoast.png", "Corgi_Toast.png", "Two_Corgi.png", "Corgi_Fall.jpg"];
-const img = "Image/" + images[Math.round(Math.random()*images.length)];
+const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
 const height = 512;
