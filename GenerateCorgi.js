@@ -96,7 +96,7 @@ async function drawCanvas() {
     const colorArray = await colors();
     function onMouseMove(event) {
         let mouse = getMousePos(c,event);
-        const possibleCircles= circleArray.map(e=>e).filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] >= 4);
+        const possibleCircles= circleArray.map(e=>e).filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] >= 2);
         if (circleArray.filter(e => Math.abs(mouse.x - e[0]) < e[2] && Math.abs(mouse.y - e[1]) < e[2] && e[2] > width/max_layers)) {
             if(circleArray.length) {
                 const circle = possibleCircles.reduce((acc,e) => Math.pow(mouse.x - e[0],2) + Math.pow(mouse.y - e[1], 2) < Math.pow(e[2],2)? e: acc,[]);
