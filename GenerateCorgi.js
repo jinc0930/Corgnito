@@ -1,5 +1,5 @@
 let images = ["Corgi_Eggtoast.png", "Corgi_Toast.png", "Two_Corgi.png", "Corgi_Fall.jpg"];
-const img = "Image/" + images[Math.ceil(Math.random()*images.length)];
+const img = "Image/" + images[Math.round(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
 const height = 512;
@@ -53,7 +53,7 @@ async function colors() {
                 colorArray[width + 1][2 * i][2 * j + 1].forEach((e, ind) => rgb[ind] += e);
                 colorArray[width + 1][2 * i + 1][2 * j].forEach((e, ind) => rgb[ind] += e);
                 colorArray[width + 1][2 * i + 1][2 * j + 1].forEach((e, ind) => rgb[ind] += e);
-                rgb = rgb.map(e => Math.ceil(e / 4));
+                rgb = rgb.map(e => Math.round(e / 4));
                 rowColors.push(rgb);
             }
             colColors.push(rowColors);
@@ -73,16 +73,16 @@ async function colors() {
         await corgiCanvas.drawImage(corgi, 0, 0, width, height);
         for (let i = 0; i < circles; ++i) {
             let lineColor = []
-            const xoffset = Math.ceil(i * width / circles);
+            const xoffset = Math.round(i * width / circles);
             for (let j = 0; j < circles; ++j) {
-                const yoffset = Math.ceil(j * width / circles);
+                const yoffset = Math.round(j * width / circles);
                 let rgb = [0, 0, 0];
 
                 let rgba = corgiCanvas.getImageData(
-                    xoffset, yoffset, Math.ceil(width/circles), Math.ceil(height/circles)
+                    xoffset, yoffset, Math.round(width/circles), Math.round(height/circles)
                 ).data;
                 rgb = rgb.map((e,index) => rgba.reduce((acc,el, ind) => ind % 4 === index ? acc + el: acc, 0))
-                rgb = rgb.map(e => Math.ceil(4*e/rgba.length));
+                rgb = rgb.map(e => Math.round(4*e/rgba.length));
                 lineColor.push(rgb);
             }
             colorArray.push(lineColor);
@@ -110,8 +110,8 @@ async function drawCanvas() {
                 const circle = possibleCircles.reduce((acc,e) => Math.pow(mouse.x - e[0],2) + Math.pow(mouse.y - e[1], 2) < Math.pow(e[2],2)? e: acc,[]);
                 if (circle.length) {
                     const layer = Math.log2((width/2)/circle[2]);
-                    const left = Math.ceil((circle[0]  - circle[2])/(circle[2]));
-                    const top = Math.ceil((circle[1]  - circle[2])/(circle[2]));
+                    const left = Math.round((circle[0]  - circle[2])/(circle[2]));
+                    const top = Math.round((circle[1]  - circle[2])/(circle[2]));
                     circleArray = circleArray.filter(e => e[3] !== circle[3]);
                     ctx.clearRect(circle[0]- circle[2], circle[1]- circle[2], 2*circle[2], 2* circle[2]);
                     drawCircle(circle[0]- circle[2]/2, circle[1]- circle[2]/2, circle[2]/2, colorArray[layer+1][left][top]);
@@ -123,7 +123,7 @@ async function drawCanvas() {
         }
     }
     c.addEventListener("mousemove", (event) => onMouseMove(event), false);
-    drawCircle(Math.ceil(width/2), width/2, Math.ceil(height/2),colorArray[0][0][0]);
+    drawCircle(Math.round(width/2), width/2, Math.round(height/2),colorArray[0][0][0]);
 }
 drawCanvas();
 
