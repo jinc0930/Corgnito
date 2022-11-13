@@ -22,13 +22,14 @@ function getMousePos(canvas, evt) {
 function drawCircle(x, y, r, color) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2*Math.PI);
-    ctx.fillStyle = RGBToHex(color[0], color[1], color[2]);
+    ctx.fillStyle = "#" + componentToHex(color[0]) + componentToHex(color[1]) + componentToHex(color[2]);
     ctx.fill();
     circleArray.push([x,y,r, id++]);
 }
 
-function RGBToHex(r, g, b) {
-    return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+function componentToHex(c) {
+    let hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
 }
 
 async function colors() {
