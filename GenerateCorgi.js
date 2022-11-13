@@ -114,7 +114,7 @@ async function drawCanvas() {
         }
     }
     c.addEventListener("mousemove", (event) => onMouseMove(event), false);
-    drawCircle(width/2, width/2, height/2,colorArray[0][0][0]);
+    drawCircle(Math.round(width/2), Math.round(width/2), Math.round(height/2), colorArray[0][0][0]);
 }
 drawCanvas();
 
