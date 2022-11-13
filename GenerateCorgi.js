@@ -1,10 +1,9 @@
-let images = ["640x530.jpg", "Corgi_BubbleTea.png", "Corgi_EggBun.png", "Corgi_Macaroon.png", "Corgi_Rice.png", "Corgi_Eggtoast.png", "Corgi_Study.png", "Corgi_Toast.png", "Two_Corgi.png", "Toasts.png"];
+let images = ["Corgi_Blanket.jpeg", "Corgi_Bread.jpg", "Corgi_Eggtoast.png", "Corgi_Fall.jpg", "Corgi_Leash.jpeg", "Corgi_Macaroon.png", "Corgi_Rice.png", "Corgi_Run.jpeg", "Corgi_Study.png", "Corgi_Toast.png", "Two_Corgi.png"];
 const img = "Image/" + images[Math.floor(Math.random()*images.length)];
 const corgi = document.createElement('img');
 const width = 512;
 const height = 512;
 const max_layers= 8;
-// pic.src = img;
 corgi.src = img;
 const c = document.getElementById("circle");
 const ctx = c.getContext("2d");
@@ -20,23 +19,16 @@ function getMousePos(canvas, evt) {
     };
 }
 
-
 function drawCircle(x, y, r, color) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2*Math.PI);
-    ctx.fillStyle = convertRGBtoHex(color);
+    ctx.fillStyle = RGBToHex(color[0], color[1], color[2]);
     ctx.fill();
     circleArray.push([x,y,r, id++]);
 }
 
-function convertRGBtoHex(color) {
-    let R = color[0];
-    let G = color[1];
-    let B = color[2];
-    if ((R >= 0 && R <= 255) && (G >= 0 && G <= 255) && (B >= 0 && B <= 255)) {
-        return "#" + R.toString(16) + G.toString(16) + B.toString(16);
-    }
-    return "#000000";
+function RGBToHex(r, g, b) {
+    return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
 }
 
 async function colors() {
@@ -122,7 +114,7 @@ async function drawCanvas() {
         }
     }
     c.addEventListener("mousemove", (event) => onMouseMove(event), false);
-    drawCircle(Math.round(width/2), Math.round(width/2), Math.round(height/2),colorArray[0][0][0]);
+    drawCircle(width/2, width/2, height/2,colorArray[0][0][0]);
 }
 drawCanvas();
 
