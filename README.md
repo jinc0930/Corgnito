@@ -1,4 +1,4 @@
-# corgnito.tech
+# corgnito
 Welcome! 
 
 Inspiration
