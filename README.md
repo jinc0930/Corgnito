@@ -3,7 +3,7 @@ Welcome!
 
 At corgnito, users hover the colorful circles to reveal the image in-corgnito. Corgnito.tech brings calmness and a piece of mind to its users by revealing them beautiful images.
 
-##Inspiration
+## Inspiration
 
 Our inspiration was koalatothemax.com
 
