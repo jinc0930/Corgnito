@@ -1,4 +1,4 @@
-# HackUmass
+# corgnito.tech
 Welcome! 
 
 Inspiration
