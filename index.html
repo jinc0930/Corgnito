@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html>
-   <base href = "/">
+<base href="/">
 
    <head>
       <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-      <link rel = "stylesheet" href = "style.css" type = "text/css">
+      <link rel="stylesheet" href="style.css" type="text/css">
+      <style>
+         body {
+            font-family: 'Chewy', cursive;
+            visibility: hidden; 
+         }
+      </style>
    </head>
 
    <body>
       <h1>Uncover the Art!</h1>
-      <div class = "container">
-         <canvas id = "circle" width = 512 height = 512></canvas>
+      <div class="container">
+         <canvas id="circle" width="512" height="512"></canvas>
       </div>
-         <script src = "GenerateCorgi.js" type = "text/javascript"></script>
+
+      <button id="refreshBtn" disabled>New Art</button>
+
+      <script>
+         document.fonts.load('1em "Chewy"').then(() => {
+            document.body.style.visibility = 'visible';
+            const btn = document.getElementById('refreshBtn');
+            btn.disabled = false;
+            btn.onclick = function () {
+            location.reload();
+            };
+         });
+      </script>
+
+      <script src="GenerateCorgi.js" type="text/javascript"></script>
    </body>
 </html>
