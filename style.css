@@ -4,9 +4,28 @@
    object-fit:cover;
 }
 
-.container {
+body {
+   margin: 0;
+   font-family: 'Chewy', cursive;
+   background: #fff0f5;
    display: flex;
-   justify-content: center;
+   flex-direction: column;
    align-items: center;
-   height: 100vh;
+   padding-top: 100px; 
+}
+
+.container {
+   position: relative;
+   display: flex;
+   justify-content: center; 
+   align-items: flex-start;
+   margin-top: 10px;
+}
+
+h1 {
+   font-size: 3rem;   
+   font-weight: bold;
+   text-align: center;
+   margin: 0;
+   text-shadow: 0 0 8px #ffffff;
 }
